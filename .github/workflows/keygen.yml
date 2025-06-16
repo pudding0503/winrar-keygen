@@ -92,8 +92,12 @@ jobs:
 
     - name: Generating License (UTF-8)
       # Do Not Use pwsh
-      shell: powershell
-      run: .github/workflows/generate.ps1
+      # shell: powershell
+      shell: pwsh
+      run: |
+        $OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding = New-Object System.Text.UTF8Encoding
+        $PSVersionTable.PSVersion
+        bin/x64-Release/winrar-keygen.exe "utf8:${{env.KEY_USERNAME}}" "${{env.KEY_LICENSE_NAME}}" | Out-File -Encoding ${{env.KEY_ENCODING}} rarreg.key
       
     - name: Uploading License
       uses: actions/upload-artifact@v4.4.3
