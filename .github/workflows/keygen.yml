@@ -97,6 +97,7 @@ jobs:
       run: |
         $OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding = New-Object System.Text.UTF8Encoding
         $PSVersionTable.PSVersion
+        "KEY_USERNAME as bytes:" + [BitConverter]::ToString([System.Text.Encoding]::Default.GetBytes("${{ env.KEY_USERNAME }}"))
         bin/x64-Release/winrar-keygen.exe "utf8:${{env.KEY_USERNAME}}" "${{env.KEY_LICENSE_NAME}}" | Out-File -Encoding ${{env.KEY_ENCODING}} rarreg.key
       
     - name: Uploading License
