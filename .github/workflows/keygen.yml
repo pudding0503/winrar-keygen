@@ -96,7 +96,9 @@ jobs:
       run: |
         $OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding = New-Object System.Text.UTF8Encoding
         $PSVersionTable.PSVersion
-        bin/x64-Release/winrar-keygen.exe "utf8:${{env.KEY_USERNAME}}" "${{env.KEY_LICENSE_NAME}}" | Out-File -Encoding ${{env.KEY_ENCODING}} rarreg.key
+        $text_1 = "utf8:${{env.KEY_USERNAME}}"
+        $text_2 = "${{env.KEY_LICENSE_NAME}}"
+        & "bin/x64-Release/winrar-keygen.exe" $user $license | Out-File -Encoding utf8 rarreg.key
       
     - name: Uploading License
       uses: actions/upload-artifact@v4.4.3
