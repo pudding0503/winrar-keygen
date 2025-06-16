@@ -93,13 +93,7 @@ jobs:
     - name: Generating License (UTF-8)
       # Do Not Use pwsh
       shell: powershell
-      run: |
-        chcp 65001
-        $OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding = New-Object System.Text.UTF8Encoding
-        $PSVersionTable.PSVersion
-        $username = "utf8:${{ env.KEY_USERNAME }}"
-        $license = "${{ env.KEY_LICENSE_NAME }}"
-        & "bin/x64-Release/winrar-keygen.exe" $username $license | Out-File -Encoding ${{env.KEY_ENCODING}} -Force rarreg.key
+      run: generate.ps1
       
     - name: Uploading License
       uses: actions/upload-artifact@v4.4.3
