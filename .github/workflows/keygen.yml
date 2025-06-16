@@ -92,8 +92,7 @@ jobs:
 
     - name: Generating License (UTF-8)
       # Do Not Use pwsh
-      # shell: powershell
-      shell: pwsh
+      shell: powershell
       run: |
         $OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding = New-Object System.Text.UTF8Encoding
         $PSVersionTable.PSVersion
