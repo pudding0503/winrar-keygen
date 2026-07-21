@@ -1,0 +1,9 @@
+* text=auto eol=lf
+
+*.aps binary
+*.exe binary
+*.ico binary
+*.png binary
+*.7z binary
+*.rar binary
+*.zip binary
