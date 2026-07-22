@@ -1,6 +1,7 @@
 name: Build All Platforms
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  VCPKG_OVERLAY_PORTS: vcpkg-overlays/ports
 on:
   workflow_dispatch:
     inputs:
@@ -53,7 +54,7 @@ jobs:
 
       - name: Build
         run: |
-          msbuild winrar-keygen.vcxproj /p:Configuration=Release /p:Platform=x64 /p:VcpkgEnableManifest=true /p:VcpkgAdditionalInstallOptions="--overlay-ports=vcpkg-overlays/ports"
+          msbuild winrar-keygen.vcxproj /p:Configuration=Release /p:Platform=x64 /p:VcpkgEnableManifest=true /p:VcpkgAdditionalInstallOptions="--overlay-ports=${{ env.VCPKG_OVERLAY_PORTS }}"
 
       - name: Prepare artifact
         shell: pwsh
@@ -89,7 +90,7 @@ jobs:
 
       - name: Build
         run: |
-          msbuild winrar-keygen.vcxproj /p:Configuration=Release /p:Platform=Win32 /p:VcpkgEnableManifest=true /p:VcpkgAdditionalInstallOptions="--overlay-ports=vcpkg-overlays/ports"
+          msbuild winrar-keygen.vcxproj /p:Configuration=Release /p:Platform=Win32 /p:VcpkgEnableManifest=true /p:VcpkgAdditionalInstallOptions="--overlay-ports=${{ env.VCPKG_OVERLAY_PORTS }}"
 
       - name: Prepare artifact
         shell: pwsh
@@ -125,7 +126,7 @@ jobs:
 
       - name: Build
         run: |
-          msbuild winrar-keygen.vcxproj /p:Configuration=Release /p:Platform=ARM64 /p:VcpkgEnableManifest=true /p:VcpkgAdditionalInstallOptions="--overlay-ports=vcpkg-overlays/ports"
+          msbuild winrar-keygen.vcxproj /p:Configuration=Release /p:Platform=ARM64 /p:VcpkgEnableManifest=true /p:VcpkgAdditionalInstallOptions="--overlay-ports=${{ env.VCPKG_OVERLAY_PORTS }}"
 
       - name: Prepare artifact
         shell: pwsh

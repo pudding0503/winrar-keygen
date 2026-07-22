@@ -85,9 +85,15 @@ if(VCPKG_CROSSCOMPILING)
 endif()
 
 if(VCPKG_HOST_IS_WINDOWS AND (NOT DEFINED VCPKG_MAKE_ACQUIRE_MSYS OR VCPKG_MAKE_ACQUIRE_MSYS))
-    # dumpbin detection fails with autoconf 2.72; use PACKAGES to get the
-    # current autoconf2.71 build from the MSYS2 database instead of a
-    # hardcoded URL that may no longer be available on all mirrors.
+    # autoconf 2.72 broke dumpbin detection in GMP's configure script on Windows
+    # (the AC_CHECK_TOOL macro fails to find MSVC's dumpbin when autoconf 2.72 is
+    # used, causing the build to fall back to a slower code path or fail).
+    # autoconf 2.71 does not have this regression, so we pin the major version
+    # via WANT_AUTOCONF. Using PACKAGES instead of a hardcoded DIRECT_PACKAGES
+    # URL lets the MSYS2 package database resolve whichever pkgrel is current,
+    # avoiding 404 errors when older package builds are removed from mirrors.
+    # This workaround can be removed once GMP upstream or autoconf 2.72 fixes
+    # the dumpbin detection issue.
     set(ENV{WANT_AUTOCONF} 2.71)
     vcpkg_acquire_msys(MSYS_ROOT
         PACKAGES autoconf2.71 autoconf-wrapper automake-wrapper autoconf-archive binutils libtool make which
