@@ -53,7 +53,7 @@ jobs:
 
       - name: Build
         run: |
-          msbuild winrar-keygen.vcxproj /p:Configuration=Release /p:Platform=x64 /p:VcpkgEnableManifest=true
+          msbuild winrar-keygen.vcxproj /p:Configuration=Release /p:Platform=x64 /p:VcpkgEnableManifest=true /p:VcpkgAdditionalInstallOptions="--overlay-ports=vcpkg-overlays/ports"
 
       - name: Prepare artifact
         shell: pwsh
@@ -89,7 +89,7 @@ jobs:
 
       - name: Build
         run: |
-          msbuild winrar-keygen.vcxproj /p:Configuration=Release /p:Platform=Win32 /p:VcpkgEnableManifest=true
+          msbuild winrar-keygen.vcxproj /p:Configuration=Release /p:Platform=Win32 /p:VcpkgEnableManifest=true /p:VcpkgAdditionalInstallOptions="--overlay-ports=vcpkg-overlays/ports"
 
       - name: Prepare artifact
         shell: pwsh
@@ -125,7 +125,7 @@ jobs:
 
       - name: Build
         run: |
-          msbuild winrar-keygen.vcxproj /p:Configuration=Release /p:Platform=ARM64 /p:VcpkgEnableManifest=true
+          msbuild winrar-keygen.vcxproj /p:Configuration=Release /p:Platform=ARM64 /p:VcpkgEnableManifest=true /p:VcpkgAdditionalInstallOptions="--overlay-ports=vcpkg-overlays/ports"
 
       - name: Prepare artifact
         shell: pwsh
